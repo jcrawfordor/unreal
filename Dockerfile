@@ -27,4 +27,4 @@ RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org
 RUN apt-get remove -y build-essential && apt-get clean
 
 USER unrealircd
-CMD /data/unrealircd/unrealircd
+CMD /data/unrealircd/unrealircd start
