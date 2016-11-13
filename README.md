@@ -18,6 +18,11 @@ include some other config files you need as well (e..g
 `operclass.default.conf`), these can be found in docs/conf in the source
 package.
 
+Note that in Unreal 4.x the SSL certificate and key are expected to be
+`server.cert.pem` and `server.key.pem` respectively in the configuration
+directory. You may need to move them form where you had them in 3.2, if your
+configuration enables SSL listening.
+
 Once you have this configuration gathered up, put it in one directory and
 provide that as a hostmount to the container at `/data/unrealircd/conf`. For example:
 
