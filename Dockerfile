@@ -9,22 +9,20 @@ RUN apt-get update && \
 RUN curl -s --location https://www.unrealircd.org/unrealircd4/unrealircd-$UNREALIRCD_VERSION.tar.gz | tar xz && \
 	cd unrealircd-$UNREALIRCD_VERSION && \
 	./Config \
-      --enable-ssl=/etc/ssl/localcerts/ \
+      --enable-ssl=/unrealircd/ssl/ \
       --with-showlistmodes \
       --with-listen=5 \
-      --with-dpath=/data/ \
-      --with-spath=/usr/bin/unrealircd \
       --with-nick-history=2000 \
       --with-sendq=3000000 \
       --with-bufferpool=18 \
       --with-permissions=0600 \
       --with-fd-setsize=1024 \
       --enable-dynamic-linking && \
-	make && \
+    make && \
     make install
 
 RUN apt-get remove -y build-essential && apt-get clean
-RUN chmod 755 /root/unrealircd/unrealircd
+RUN mv /root/unrealircd /
 RUN useradd -r -d /root/unrealircd unreal
 USER unreal
 CMD /root/unrealircd/unrealircd
