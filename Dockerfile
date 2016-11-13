@@ -21,9 +21,10 @@ RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org
     sudo -u unrealircd make && \
     sudo -u unrealircd make install && \
 	cd /data && \
-	rm -rf unrealircd-$UNREALIRCD_VERSION
+	rm -rf unrealircd-$UNREALIRCD_VERSION && \
+	chmod +x /data/unrealircd/unrealircd
 
 RUN apt-get remove -y build-essential && apt-get clean
 
 USER unrealircd
-CMD /data/unrealircd
+CMD /data/unrealircd/unrealircd
