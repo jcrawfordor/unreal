@@ -1,13 +1,14 @@
-unreal
-======
+#Unreal
 
-This is a simple and not particular elegant Docker container to run Unreal
-4.x. The configuration should be mounted via host volume at
-`/root/unrealircd/conf`. UnrealIRCD does not run as root, although it's in
-root's homedir because I am lazy.
+This is a simple although not particular elegant Docker container to run Unreal IRCd
+4.x. The configuration should be mounted via host volume at `/root/unrealircd/conf`, 
+and the administrator is otherwise left to their own devices as far as usage.
 
-Usage
------
+Unreal IRCd is compiled at build time and so can be updated by rebuilding the
+container. I will trigger a rebuild whenever there are new releases, although
+administrators will need to ensure that they re-pull the image from time to time.
+
+##Usage
 
 To start, you will need a complete and working configuration for unrealircd.
 This can be a bit of an ordeal to create. The simplest method is to either
@@ -30,3 +31,24 @@ provide that as a hostmount to the container at `/data/unrealircd/conf`. For exa
 docker run -v /srv/unreal:/data/unrealircd/conf -p 6667:6667
 jcrawfordor/unreal
 ```
+## Notes
+
+UnrealIRCD's build and installation process is, in this author's opinion, an
+autotools dumpster fire. A remarkable amount of frustration was involved in
+building Unreal in-container and I could not get it to build at all in Alpine,
+thus using a heavier-weight Debian container. UnrealIRCD's design is also
+almost actively hostile to good system administration practice, so there are
+some antipatterns in the way configuration is managed here.
+
+## Pros/Cons
+
+### Pros
+
+  * Works
+  * Simple design makes this container very simple and unlikely to break things
+
+### Cons
+
+  * No autoconfiguration, so this is best if you have an existing configuration or are
+    willing to build configuration files yourself.
+  * Debian image with in-container building results in a larger image size.
