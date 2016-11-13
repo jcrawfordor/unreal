@@ -25,4 +25,4 @@ RUN apt-get remove -y build-essential && apt-get clean
 RUN mv /root/unrealircd /
 RUN useradd -r -d /root/unrealircd unreal
 USER unreal
-CMD /root/unrealircd/unrealircd
+CMD /unrealircd/unrealircd
