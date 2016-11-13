@@ -22,7 +22,7 @@ RUN curl -s --location https://www.unrealircd.org/unrealircd4/unrealircd-$UNREAL
     make install
 
 RUN apt-get remove -y build-essential && apt-get clean
-RUN mv /root/unrealircd /
+RUN mv /root/unrealircd / && chmod -R a+rX /unrealircd
 RUN useradd -r -d /root/unrealircd unreal
 USER unreal
 CMD /unrealircd/unrealircd
